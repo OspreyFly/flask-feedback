@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %} Feedback Stack - Add Feedback {% endblock %}
+
+{% block content %}
+<h2>Let us know what you think!</h2>
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% for category, message in messages %}
+<div class="flash-message flash-{{ category }}">
+    {{ message }}
+</div>
+{% endfor %}
+{% endwith %}
+<form method="POST" action="{{ url_for('add_feedback', username=username) }}">
+    {{ form.hidden_tag() }}
+
+    <label for="{{ form.title.id }}">Title:</label>
+    {{ form.title(class="form-control", id=form.title.id) }}
+    {% if form.title.errors %}
+    <ul class="errors">
+        {% for error in form.title.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <label for="{{ form.content.id }}">Content:</label>
+    {{ form.content(class="form-control", id=form.content.id) }}
+    {% if form.content.errors %}
+    <ul class="errors">
+        {% for error in form.content.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <button id="deleteButton" class="btn btn-primary warning" data-feedback-id="{{ feedback_id }}">Delete
+        Feedback</button>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

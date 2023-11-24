@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+
+<body>
+    <div id="header">
+        <h1>Feedback Stack</h1>
+        <span id="nav-bar">
+            <a href="/register"><b>Register</b></a>
+            <a href="/login"><b>Login</b></a>
+            <a href="/logout"><b>Logout</b></a>
+            <a href="/users"><b>Profile</b></a>
+            <a href="{{ url_for('add_feedback', username=session['username'])}}">Feedback</a>
+
+        </span>
+    </div>
+    {% block content %}{% endblock %}
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+
+</html>
